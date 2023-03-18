@@ -1,5 +1,8 @@
 package com.trip.want.common.constant;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 public enum MemberType {
     USER("회원"),
     ADMIN("관리자");
