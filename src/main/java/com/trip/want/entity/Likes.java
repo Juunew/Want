@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Table(name = "like")
+@Table(name = "likes")
 @Entity
-public class Like {
+public class Likes {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "like_id")
+    @Column(name = "likes_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
