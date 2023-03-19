@@ -1,12 +1,14 @@
 package com.trip.want.entity;
 
 import com.trip.want.common.constant.MemberType;
-import lombok.*;
+import com.trip.want.dto.member.signUp.SignUpReqDto;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -68,4 +70,17 @@ public class Member {
         );
     }
 
+    public static Member createMember(SignUpReqDto dto) {
+        return Member.of(
+                dto.getAccountId(),
+                dto.getAccountPw(),
+                dto.getNickname(),
+                dto.getMemberName(),
+                dto.getBirthday(),
+                dto.getEmail(),
+                dto.getPhone(),
+                MemberType.USER,
+                LocalDateTime.now()
+        );
+    }
 }

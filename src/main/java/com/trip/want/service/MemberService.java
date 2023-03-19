@@ -8,6 +8,7 @@ import com.trip.want.dto.member.MemberResDto;
 import com.trip.want.dto.member.login.LoginMemberSessionDto;
 import com.trip.want.dto.member.login.LoginReqDto;
 import com.trip.want.dto.member.signUp.SignUpReqDto;
+import com.trip.want.entity.Member;
 import com.trip.want.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,10 @@ public class MemberService {
     private final SessionManager sessionManager;
 
     public MemberResDto createMember(SignUpReqDto dto) {
-        return MemberResDto.of(memberRepository.save(dto.toEntity()).getId());
+        return MemberResDto.of(memberRepository.save(Member.createMember(dto)).getId());
     }
 
+    // TODO: boolean 이 아닌 Exception Message 를 return?
     @Transactional(readOnly = true)
     public boolean checkAccountIdDuplicate(String accountId) {
         return memberRepository.existsByAccountId(accountId);
@@ -59,7 +61,7 @@ public class MemberService {
     private MemberDto checkMember(LoginReqDto dto) {
         MemberDto memberDto = MemberDto.fromEntity(memberRepository.findByAccountId(dto.getAccountId()));
 
-        // accountId check, accountPw check 분리?
+        // TODO: accountId check, accountPw check 분리?
         // accountId check
         if (memberDto == null) {
             throw new MemberException(MemberError.MEMBER_NOT_FOUND);

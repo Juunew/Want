@@ -2,7 +2,10 @@ package com.trip.want.dto.member.signUp;
 
 import com.trip.want.common.constant.MemberType;
 import com.trip.want.entity.Member;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +13,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+@Getter
 public class SignUpReqDto {
 
     @NotBlank(message = "아이디를 입력해주세요.")
@@ -40,19 +43,5 @@ public class SignUpReqDto {
     @NotBlank(message = "휴대폰 번호를 입력해주세요.")
     @Pattern(regexp = "(010)(\\d{4})(\\d{4})", message = "올바른 휴대폰 번호를 입력해주세요.")
     private String phone;
-
-    public Member toEntity() {
-        return Member.of(
-                accountId,
-                accountPw,
-                nickname,
-                memberName,
-                birthday,
-                email,
-                phone,
-                MemberType.USER,
-                LocalDateTime.now()
-        );
-    }
 
 }
