@@ -42,7 +42,6 @@ public class Member {
     @CreatedDate
     private LocalDateTime signUpDate;
 
-    @Builder
     public Member(String accountId, String accountPw, String nickname, String memberName, String birthday, String email, String phone, MemberType memberType, LocalDateTime signUpDate) {
         this.accountId = accountId;
         this.accountPw = accountPw;
@@ -54,4 +53,19 @@ public class Member {
         this.memberType = memberType;
         this.signUpDate = signUpDate;
     }
+
+    public static Member of(String accountId, String accountPw, String nickname, String memberName, String birthday, String email, String phone, MemberType memberType, LocalDateTime signUpDate) {
+        return new Member(
+                accountId,
+                accountPw,
+                nickname,
+                memberName,
+                birthday,
+                email,
+                phone,
+                memberType,
+                signUpDate
+        );
+    }
+
 }

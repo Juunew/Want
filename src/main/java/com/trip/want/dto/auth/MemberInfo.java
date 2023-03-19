@@ -11,11 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberInfo {
 
     private Long memberId;
+    private String ip;
 
     public MemberInfo(HttpServletRequest request) {
         MemberSession memberSession = (MemberSession) request.getSession().getAttribute("memberInfo");
         if (memberSession != null) {
             this.memberId = memberSession.getMemberId();
         }
+    }
+
+    public MemberInfo setIp(String ip) {
+        this.ip = ip;
+        return this;
     }
 }
