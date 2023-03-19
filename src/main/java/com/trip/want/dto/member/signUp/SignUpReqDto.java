@@ -1,4 +1,4 @@
-package com.trip.want.dto.member;
+package com.trip.want.dto.member.signUp;
 
 import com.trip.want.common.constant.MemberType;
 import com.trip.want.entity.Member;
@@ -29,7 +29,8 @@ public class SignUpReqDto {
     private String memberName;
 
     @NotBlank(message = "생년월일을 입력해주세요.")
-    @Pattern(regexp = "([0-9]{4})([0-9]{2})(0-9){2}", message = "올바른 생년월일을 입력해주세요.")
+    // TODO: 생년월일 정규식 다시 check
+    //@Pattern(regexp = "([0-9]{4})([0-9]{2})(0-9){2}", message = "올바른 생년월일을 입력해주세요.")
     private String birthday;
 
     @NotBlank(message = "이메일을 입력해주세요.")
@@ -41,17 +42,17 @@ public class SignUpReqDto {
     private String phone;
 
     public Member toEntity() {
-        return Member.builder()
-                .accountId(accountId)
-                .accountPw(accountPw)
-                .nickname(nickname)
-                .memberName(memberName)
-                .birthday(birthday)
-                .email(email)
-                .phone(phone)
-                .memberType(MemberType.USER)
-                .signUpDate(LocalDateTime.now())
-                .build();
+        return Member.of(
+                accountId,
+                accountPw,
+                nickname,
+                memberName,
+                birthday,
+                email,
+                phone,
+                MemberType.USER,
+                LocalDateTime.now()
+        );
     }
 
 }
